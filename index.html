@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <title>Bai1</title>
+  </head>
+  <body>
+    <div ng-app="myapp">
+      <div ng-controller="HeaderController">
+        <h2>Xin chào {{data.title}} đến với website {{data.website}}!</h2>
+      </div>
+
+      <div ng-controller="ContentController">
+        <h2>Xin chào {{data.title}} đến với website {{data.website}}!</h2>
+      </div>
+    </div>
+    <script>
+      angular
+        .module("myapp", [])
+        .controller("HeaderController", function ($scope) {
+          $scope.data = {
+            title: "các bạn",
+            website: "freetuts.net",
+          };
+        })
+        .controller("ContentController", function ($scope) {
+          $scope.data = {
+            title: "các bạn 1",
+            website: "example.net",
+          };
+        });
+    </script>
+  </body>
+</html>
