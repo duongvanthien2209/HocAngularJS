@@ -28,10 +28,32 @@
           <h1>Xin chào {{name}}</h1>
         </div>
       </div>
+
+      <!-- Directives ng-bind -->
+      <div ng-controller="Example">
+        <input ng-model="name" />
+        <span ng-bind="name"></span>
+        <div my-direct></div>
+      </div>
+
+      <form form-direct></form>
     </div>
     <script>
       angular
         .module("myapp", [])
+        .directive("myDirect", function () {
+          return {
+            template: "<h1>This is my Direct</h1>",
+          };
+        })
+        .directive("formDirect", function () {
+          let str = `<input type="text" placeholder="Nhập tên của bạn" />
+        <input type="number" placeholder="Nhập tuổi của bạn" />
+        <button>Submit</button>`;
+          return {
+            template: str,
+          };
+        })
         .controller("InputController", function ($scope) {
           $scope.sayHello = function () {
             $scope.greeting = `Xin chào ${$scope.username}`;
@@ -45,7 +67,8 @@
         })
         .controller("Controller2", function ($scope) {
           // $scope.name = "Huy";
-        });
+        })
+        .controller("Example", function ($scope) {});
     </script>
   </body>
 </html>
