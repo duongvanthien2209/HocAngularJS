@@ -19,12 +19,14 @@
       </div>
 
       <!-- Phạm vi ảnh hưởng của $scope chỉ giới hạn trong ng-controller -->
-      <div ng-controller="Controller1">
-        <h1>Xin chào {{name}}</h1>
-      </div>
+      <div ng-controller="ControllerWrapper">
+        <div ng-controller="Controller1">
+          <h1>Xin chào {{name}}</h1>
+        </div>
 
-      <div ng-controller="Controller2">
-        <h1>Xin chào {{name}}</h1>
+        <div ng-controller="Controller2">
+          <h1>Xin chào {{name}}</h1>
+        </div>
       </div>
     </div>
     <script>
@@ -35,11 +37,14 @@
             $scope.greeting = `Xin chào ${$scope.username}`;
           };
         })
+        .controller("ControllerWrapper", function ($scope) {
+          $scope.name = "Huy";
+        })
         .controller("Controller1", function ($scope) {
           $scope.name = "Thien";
         })
         .controller("Controller2", function ($scope) {
-          $scope.name = "Huy";
+          // $scope.name = "Huy";
         });
     </script>
   </body>
