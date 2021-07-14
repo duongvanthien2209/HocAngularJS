@@ -12,28 +12,34 @@
   </head>
   <body>
     <div ng-app="myapp">
-      <div ng-controller="HeaderController">
-        <h2>Xin chào {{data.title}} đến với website {{data.website}}!</h2>
+      <div ng-controller="InputController">
+        <h1>{{greeting}}</h1>
+        <input type="text" ng-model="username" placeholder="Nhập tên của bạn" />
+        <button ng-click="sayHello()">Thông báo</button>
       </div>
 
-      <div ng-controller="ContentController">
-        <h2>Xin chào {{data.title}} đến với website {{data.website}}!</h2>
+      <!-- Phạm vi ảnh hưởng của $scope chỉ giới hạn trong ng-controller -->
+      <div ng-controller="Controller1">
+        <h1>Xin chào {{name}}</h1>
+      </div>
+
+      <div ng-controller="Controller2">
+        <h1>Xin chào {{name}}</h1>
       </div>
     </div>
     <script>
       angular
         .module("myapp", [])
-        .controller("HeaderController", function ($scope) {
-          $scope.data = {
-            title: "các bạn",
-            website: "freetuts.net",
+        .controller("InputController", function ($scope) {
+          $scope.sayHello = function () {
+            $scope.greeting = `Xin chào ${$scope.username}`;
           };
         })
-        .controller("ContentController", function ($scope) {
-          $scope.data = {
-            title: "các bạn 1",
-            website: "example.net",
-          };
+        .controller("Controller1", function ($scope) {
+          $scope.name = "Thien";
+        })
+        .controller("Controller2", function ($scope) {
+          $scope.name = "Huy";
         });
     </script>
   </body>
