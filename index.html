@@ -7,6 +7,12 @@
 
     <!-- AngularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/angular-sanitize/1.8.2/angular-sanitize.min.js"
+      integrity="sha512-JkCv2gG5E746DSy2JQlYUJUcw9mT0vyre2KxE2ZuDjNfqG90Bi7GhcHUjLQ2VIAF1QVsY5JMwA1+bjjU5Omabw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
 
     <style>
       .my-form {
@@ -137,10 +143,24 @@
         />
         <span ng-bind="user.name()"></span>
       </form>
+
+      <!-- ng-bind-html -->
+      <form ng-controller="ExampleForm5">
+        <input type="text" ng-model="user.name" />
+        <span ng-bind-html="user.name"></span>
+      </form>
+
+      <!-- ng-bind-template -->
+      <div ng-controller="ExampleForm6">
+        Name <input type="text" ng-model="name" /><br />
+        Website: <input type="text" ng-model="website" /><br />
+        <!-- <pre ng-bind-template="{{name}} {{website}}!"></pre> -->
+        <pre>{{name}} {{website}} !</pre>
+      </div>
     </div>
     <script>
       angular
-        .module("myapp", [])
+        .module("myapp", ["ngSanitize"])
         .directive("myDirect", function () {
           return {
             template: "<h1>This is my Direct</h1>",
@@ -194,7 +214,9 @@
               return angular.isDefined(newName) ? newName : _name;
             },
           };
-        });
+        })
+        .controller("ExampleForm5", ($scope) => {})
+        .controller("ExampleForm6", ($scope) => {});
     </script>
   </body>
 </html>
