@@ -8,6 +8,24 @@
     <!-- AngularJS -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 
+    <style>
+      .my-form {
+        padding: 10px;
+        border: 1px solid red;
+      }
+
+      .my-input {
+        transition: all linear 0.3s;
+        background-color: transparent;
+      }
+
+      /* class ng-invalid được tạo khi pattern ko hợp lệ */
+      .my-input.ng-invalid {
+        color: white;
+        background-color: red;
+      }
+    </style>
+
     <title>Bai1</title>
   </head>
   <body>
@@ -36,7 +54,51 @@
         <div my-direct></div>
       </div>
 
+      <!-- Ng-model -->
+      <!-- ng-pattern dùng để check hợp lệ của value -->
+      <div ng-controller="ngModel">
+        <label>Name</label>
+        <input
+          ng-model="val"
+          ng-pattern="/^\d+$/"
+          name="anim"
+          class="my-input"
+        />
+      </div>
+
       <form form-direct></form>
+
+      <!-- Example Form Valid -->
+      <form class="my-form" name="exampleForm" ng-controller="ExampleForm">
+        <label for="so1">So1</label>
+        <input
+          class="my-input"
+          id="so1"
+          type="text"
+          name="number11"
+          ng-pattern="/^[0-9]+$/"
+          ng-model="number1"
+          placeholder="Nhập số 1"
+          ng-keyup="calculate()"
+          required
+        />
+        <br />
+        <label for="so2">So2</label>
+        <input
+          class="my-input"
+          id="so2"
+          type="text"
+          name="number22"
+          ng-pattern="/^[0-9]+$/"
+          ng-model="number2"
+          placeholder="Nhập số 2"
+          ng-keyup="calculate()"
+          required
+        />
+        <h1>Cộng: {{result.cong}}</h1>
+        <h1>Trừ: {{result.tru}}</h1>
+        <button ng-click="calculate()">ADD</button>
+      </form>
     </div>
     <script>
       angular
@@ -68,7 +130,22 @@
         .controller("Controller2", function ($scope) {
           // $scope.name = "Huy";
         })
-        .controller("Example", function ($scope) {});
+        .controller("Example", function ($scope) {})
+        .controller("ngModel", ($scope) => {})
+        .controller("ExampleForm", ($scope) => {
+          $scope.calculate = () => {
+            debugger;
+            if ($scope.number11.$valid) alert("Input 1");
+
+            if ($scope.number22.$valid) alert("Input 2");
+
+            if ($scope.exampleForm.$valid)
+              $scope.result = {
+                cong: $scope.number1 + $scope.number2,
+                tru: $scope.number1 - $scope.number2,
+              };
+          };
+        });
     </script>
   </body>
 </html>
