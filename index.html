@@ -157,6 +157,20 @@
         <!-- <pre ng-bind-template="{{name}} {{website}}!"></pre> -->
         <pre>{{name}} {{website}} !</pre>
       </div>
+
+      <!-- Form -->
+      <form name="form1" ng-controller="ExampleForm7">
+        <label>Name</label>
+        <input
+          type="text"
+          name="input1"
+          ng-model="name"
+          ng-pattern="/^[0-9]+$/"
+          required
+        /><br />
+        <span>$valid: {{form1.input1.$valid}}</span>
+        <span>$error: {{form1.input1.$error}}</span>
+      </form>
     </div>
     <script>
       angular
@@ -216,7 +230,8 @@
           };
         })
         .controller("ExampleForm5", ($scope) => {})
-        .controller("ExampleForm6", ($scope) => {});
+        .controller("ExampleForm6", ($scope) => {})
+        .controller("ExampleForm7", ($scope) => {});
     </script>
   </body>
 </html>
