@@ -99,6 +99,44 @@
         <h1>Trừ: {{result.tru}}</h1>
         <button ng-click="calculate()">ADD</button>
       </form>
+
+      <!-- Ng-model-options -- onUpdate -->
+      <!-- Khồng có ng-model-options -->
+      <form ng-controller="ExampleForm1">
+        <input type="text" ng-model="user.name" />
+        <span ng-bind="user.name"></span>
+      </form>
+
+      <!-- Có ng-model-options updateOn -->
+      <form ng-controller="ExampleForm2">
+        <input
+          type="text"
+          ng-model="user.name"
+          ng-model-options="{updateOn: 'blur'}"
+        />
+        <span ng-bind="user.name"></span>
+      </form>
+
+      <!-- Có ng-model-options debounce - millisecond -->
+      <!-- Khi ngưng gõ 1s thì $scope update dữ liệu -->
+      <form ng-controller="ExampleForm3">
+        <input
+          type="text"
+          ng-model="user.name"
+          ng-model-options="{debounce: 1000}"
+        />
+        <span ng-bind="user.name"></span>
+      </form>
+
+      <!-- Có ng-model-options getterSetter: boolean -->
+      <form ng-controller="ExampleForm4">
+        <input
+          type="text"
+          ng-model="user.name"
+          ng-model-options="{getterSetter: true}"
+        />
+        <span ng-bind="user.name()"></span>
+      </form>
     </div>
     <script>
       angular
@@ -144,6 +182,17 @@
                 cong: $scope.number1 + $scope.number2,
                 tru: $scope.number1 - $scope.number2,
               };
+          };
+        })
+        .controller("ExampleForm1", ($scope) => {})
+        .controller("ExampleForm2", ($scope) => {})
+        .controller("ExampleForm3", ($scope) => {})
+        .controller("ExampleForm4", ($scope) => {
+          let _name = "duongVanThien";
+          $scope.user = {
+            name: (newName) => {
+              return angular.isDefined(newName) ? newName : _name;
+            },
           };
         });
     </script>
