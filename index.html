@@ -183,6 +183,36 @@
         /><br />
         <ul ng-bind-html="result"></ul>
       </form>
+
+      <!-- Input Checkbox -->
+      <form ng-controller="ExampleForm9">
+        <input
+          type="checkbox"
+          name="game"
+          ng-model="game"
+          ng-true-value="'Có'"
+          ng-false-value="'Không'"
+        />
+        <br />
+        <input
+          type="checkbox"
+          name="tour"
+          ng-model="tour"
+          ng-true-value="'Có'"
+          ng-false-value="'Không'"
+        />
+        <br />
+        <span>Bạn muốn chơi game: {{game}}</span>
+        <br />
+        <span>Bạn muốn đi du lịch: {{tour}}</span>
+      </form>
+
+      <!-- Input Date -->
+      <form ng-controller="ExampleForm10">
+        <input type="date" ng-model="value" />
+        <!-- Dùng biểu thức để định dạng lại ngày -->
+        <span>{{value | date: 'dd/MM/yyyy'}}</span>
+      </form>
     </div>
     <script>
       angular
@@ -253,6 +283,10 @@
             }
             $scope.result = result.map((item) => `<li>${item}</li>`).join("");
           };
+        })
+        .controller("ExampleForm9", ($scope) => {})
+        .controller("ExampleForm10", ($scope) => {
+          $scope.value = new Date(); // Truyền giá trị ngày vào input date
         });
     </script>
   </body>
