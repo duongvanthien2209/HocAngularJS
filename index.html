@@ -171,6 +171,18 @@
         <span>$valid: {{form1.input1.$valid}}</span>
         <span>$error: {{form1.input1.$error}}</span>
       </form>
+
+      <!-- NgForm -->
+      <form ng-controller="ExampleForm8" ng-submit="handleSubmit()">
+        <label>Name</label>
+        <input
+          type="text"
+          name="input1"
+          ng-model="name"
+          ng-required="true"
+        /><br />
+        <ul ng-bind-html="result"></ul>
+      </form>
     </div>
     <script>
       angular
@@ -231,7 +243,17 @@
         })
         .controller("ExampleForm5", ($scope) => {})
         .controller("ExampleForm6", ($scope) => {})
-        .controller("ExampleForm7", ($scope) => {});
+        .controller("ExampleForm7", ($scope) => {})
+        .controller("ExampleForm8", ($scope) => {
+          var result = [];
+          $scope.handleSubmit = () => {
+            if ($scope.name) {
+              result.push($scope.name);
+              $scope.name = "";
+            }
+            $scope.result = result.map((item) => `<li>${item}</li>`).join("");
+          };
+        });
     </script>
   </body>
 </html>
