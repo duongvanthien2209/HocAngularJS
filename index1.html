@@ -68,6 +68,36 @@
         <p ng-show="check">Đủ tuổi</p>
         <p ng-hide="check">Chưa đủ tuổi</p>
       </form>
+
+      <!-- ng-repeat -->
+      <div ng-controller="Example4">
+        <div ng-repeat="item in items">
+          <p>{{item.name}}</p>
+          <p>{{item.age}}</p>
+        </div>
+      </div>
+
+      <div ng-controller="Example5">
+        <div ng-repeat-start="(key,item) in items">
+          <p>{{item.name}}</p>
+        </div>
+        <p ng-repeat-end>Tuổi: {{item.age}}</p>
+      </div>
+
+      <div
+        ng-controller="Example6"
+        ng-init="items = [
+      { name: 'Thien', age: 22 },
+      { name: 'Huy', age: 21 },
+    ]"
+      >
+        <div ng-repeat-start="(key,item) in items">
+          <p>{{item.name}}</p>
+        </div>
+        <p ng-repeat-end>Tuổi: {{item.age}}</p>
+      </div>
+
+      <div ng-controller="Example7"></div>
     </div>
 
     <script>
@@ -95,7 +125,20 @@
           $scope.handleChange = () => {
             $scope.check = $scope.age > 20;
           };
-        });
+        })
+        .controller("Example4", ($scope) => {
+          $scope.items = [
+            { name: "Thien", age: 22 },
+            { name: "Huy", age: 21 },
+          ];
+        })
+        .controller("Example5", ($scope) => {
+          $scope.items = [
+            { name: "Thien", age: 22 },
+            { name: "Huy", age: 21 },
+          ];
+        })
+        .controller("Example6", ($scope) => {});
     </script>
   </body>
 </html>
