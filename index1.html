@@ -54,6 +54,20 @@
         />
         <p>{{userDate | date: 'dd/MM/yyyy'}}</p>
       </form>
+
+      <!-- ng-hide / ng-show -->
+      <form name="form2" ng-controller="Example3">
+        <input
+          type="number"
+          name="age"
+          ng-model="age"
+          ng-change="handleChange()"
+          required
+        />
+
+        <p ng-show="check">Đủ tuổi</p>
+        <p ng-hide="check">Chưa đủ tuổi</p>
+      </form>
     </div>
 
     <script>
@@ -74,6 +88,13 @@
         })
         .controller("Example2", ($scope) => {
           $scope.userDate = new Date();
+        })
+        .controller("Example3", ($scope) => {
+          $scope.check = false;
+
+          $scope.handleChange = () => {
+            $scope.check = $scope.age > 20;
+          };
         });
     </script>
   </body>
