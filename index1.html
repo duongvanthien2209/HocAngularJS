@@ -97,7 +97,10 @@
         <p ng-repeat-end>Tuổi: {{item.age}}</p>
       </div>
 
-      <div ng-controller="Example7"></div>
+      <div ng-controller="Example7">
+        <div ng-include="'./template-a.html'"></div>
+        <div ng-include="'./template-b.html'"></div>
+      </div>
     </div>
 
     <script>
@@ -138,7 +141,10 @@
             { name: "Huy", age: 21 },
           ];
         })
-        .controller("Example6", ($scope) => {});
+        .controller("Example6", ($scope) => {})
+        .controller("Example7", ($scope) => {
+          $scope.name = "Thien";
+        });
     </script>
   </body>
 </html>
