@@ -15,7 +15,7 @@
       <!-- <div ng-controller="Example">
         <p ng-bind="text"></p>
       </div> -->
-      <form name="form1" ng-controller="Example1" ng-submit="handleSubmit()">
+      <!-- <form name="form1" ng-controller="Example1" ng-submit="handleSubmit()">
         <p ng-bind="text"></p>
         <input
           type="text"
@@ -40,26 +40,41 @@
         />
         <p ng-bind="errorPassword"></p>
         <input type="submit" />
+      </form> -->
+
+      <!-- Datetime-local -->
+      <form name="form1" ng-controller="Example2">
+        <input
+          type="date"
+          name="userDate"
+          ng-model="userDate"
+          min="2014-01-01"
+          max="2014-12-31"
+          required
+        />
+        <p>{{userDate | date: 'dd/MM/yyyy'}}</p>
       </form>
     </div>
 
     <script>
-      angular.module("bai2", []).controller("Example1", ($scope) => {
-        $scope.text = "Xin chào";
+      angular
+        .module("bai2", [])
+        .controller("Example1", ($scope) => {
+          $scope.text = "Xin chào";
 
-        $scope.handleChange = () => {
-          $scope.errorUsername = $scope.form1.username.$valid
-            ? ""
-            : "Bạn nhập sai username";
+          $scope.handleChange = () => {
+            $scope.errorUsername = $scope.form1.username.$valid
+              ? ""
+              : "Bạn nhập sai username";
 
-          $scope.errorPassword = $scope.form1.password.$valid
-            ? ""
-            : "Bạn nhập sai mật khẩu";
-        };
-      });
-      // .controller("Example", ($scope) => {
-      //   $scope.text = "Hello world";
-      // });
+            $scope.errorPassword = $scope.form1.password.$valid
+              ? ""
+              : "Bạn nhập sai mật khẩu";
+          };
+        })
+        .controller("Example2", ($scope) => {
+          $scope.userDate = new Date();
+        });
     </script>
   </body>
 </html>
