@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <script>
+      const module = angular.module("bai3", []);
+
+      module.controller("Example", [
+        "$scope",
+        "kiemTraSoChan",
+        function ($scope, kiemTraSoChan) {
+          $scope.check = () => {
+            kiemTraSoChan($scope.number);
+          };
+        },
+      ]);
+
+      module.service("kiemTraSoChan", function ($window) {
+        return function (number) {
+          if (number % 2 === 0) $window.alert("La so chan");
+        };
+      });
+    </script>
+
+    <title>Bai 3</title>
+  </head>
+  <body>
+    <div ng-app="bai3">
+      <form ng-controller="Example">
+        <input type="number" ng-model="number" ng-change="check()" />
+      </form>
+    </div>
+  </body>
+</html>
