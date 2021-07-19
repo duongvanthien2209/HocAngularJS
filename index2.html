@@ -47,8 +47,14 @@
               red: !isBlue,
             };
           };
-        });
+        })
+        .controller("Example2", ($scope) => {
+          $scope.currentTab = 1;
 
+          $scope.isActive = (number) => number === $scope.currentTab;
+
+          $scope.changeTab = (number) => ($scope.currentTab = number);
+        });
       module.service("validate", function ($window, kiemTraSoChan) {
         return function (number) {
           if (kiemTraSoChan(number)) $window.alert("La so chan");
@@ -79,6 +85,10 @@
       .border {
         border: 5px solid black;
       }
+
+      a.active {
+        color: red;
+      }
     </style>
 
     <title>Bai 3</title>
@@ -92,6 +102,26 @@
       <!-- ng-class -->
       <div ng-controller="Example1" ng-class="className" ng-init="isBlue=false">
         <button ng-click="change()">Change</button>
+      </div>
+
+      <!-- Example ng-class -->
+      <div ng-controller="Example2">
+        <div class="heading">
+          <a href="#" ng-class="{active:isActive(1)}" ng-click="changeTab(1)"
+            >Tag 1</a
+          >
+          <a href="#" ng-class="{active:isActive(2)}" ng-click="changeTab(2)"
+            >Tag 2</a
+          >
+          <a href="#" ng-class="{active:isActive(3)}" ng-click="changeTab(3)"
+            >Tag 3</a
+          >
+        </div>
+        <div ng-class="{content: true}">
+          <div ng-show="currentTab === 1">Noi dung 1</div>
+          <div ng-show="currentTab === 2">Noi dung 2</div>
+          <div ng-show="currentTab === 3">Noi dung 3</div>
+        </div>
       </div>
     </div>
   </body>
