@@ -11,15 +11,43 @@
     <script>
       const module = angular.module("bai3", []);
 
-      module.controller("Example", [
-        "$scope",
-        "validate",
-        function ($scope, validate) {
-          $scope.check = () => {
-            validate($scope.number);
+      module
+        .controller("Example", [
+          "$scope",
+          "validate",
+          function ($scope, validate) {
+            $scope.check = () => {
+              validate($scope.number);
+            };
+          },
+        ])
+        .controller("Example1", function ($scope) {
+          // String
+          // $scope.className = "box red border";
+
+          // Array
+          // $scope.className = ["box", "blue border"];
+
+          let isBlue = true;
+
+          // Object
+          $scope.className = {
+            box: true,
+            border: true,
+            blue: $scope.isBlue,
+            red: !$scope.isBlue,
           };
-        },
-      ]);
+
+          $scope.change = function () {
+            isBlue = !isBlue;
+
+            $scope.className = {
+              ...$scope.className,
+              blue: isBlue,
+              red: !isBlue,
+            };
+          };
+        });
 
       module.service("validate", function ($window, kiemTraSoChan) {
         return function (number) {
@@ -33,6 +61,26 @@
       });
     </script>
 
+    <style>
+      .box {
+        display: block;
+        height: 50px;
+        width: 50px;
+      }
+
+      .red {
+        background-color: red;
+      }
+
+      .blue {
+        background-color: blue;
+      }
+
+      .border {
+        border: 5px solid black;
+      }
+    </style>
+
     <title>Bai 3</title>
   </head>
   <body>
@@ -40,6 +88,11 @@
       <form ng-controller="Example">
         <input type="number" ng-model="number" ng-change="check()" />
       </form>
+
+      <!-- ng-class -->
+      <div ng-controller="Example1" ng-class="className" ng-init="isBlue=false">
+        <button ng-click="change()">Change</button>
+      </div>
     </div>
   </body>
 </html>
