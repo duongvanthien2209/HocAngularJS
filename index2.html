@@ -13,18 +13,23 @@
 
       module.controller("Example", [
         "$scope",
-        "kiemTraSoChan",
-        function ($scope, kiemTraSoChan) {
+        "validate",
+        function ($scope, validate) {
           $scope.check = () => {
-            kiemTraSoChan($scope.number);
+            validate($scope.number);
           };
         },
       ]);
 
-      module.service("kiemTraSoChan", function ($window) {
+      module.service("validate", function ($window, kiemTraSoChan) {
         return function (number) {
-          if (number % 2 === 0) $window.alert("La so chan");
+          if (kiemTraSoChan(number)) $window.alert("La so chan");
         };
+      });
+
+      // Lưu ý service hay factory đều phải trả về 1 function
+      module.service("kiemTraSoChan", function () {
+        return (number) => number % 2 === 0;
       });
     </script>
 
